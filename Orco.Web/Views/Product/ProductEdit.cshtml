@@ -5,7 +5,7 @@
     <input asp-for="ProductId" hidden />
     <br />
     <div class="container border p-3">
-        <h1 class="text-primary">Edit Product</h1>
+        <h1 class="text-primary">Editar producto</h1>
 
         <hr />
         <div class="row">
@@ -47,20 +47,17 @@
             </div>
             <div class="col-5 offset-2">
 
-                <a asp-action="ProductIndex" class="btn-primary btn form-control ">Back to List</a>
+                <a asp-action="ProductIndex" class="btn-primary btn form-control ">Volver al listado</a>
             </div>
             <div class="col-5">
-                <input type="submit" value="Update" class="btn btn-success form-control" />
-
+                <input type="submit" value="Actualizar" class="btn btn-success form-control" />
             </div>
-
         </div>
-
         <div>
         </div>
     </div>
 </form>
 
 @section Scripts {
-<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,27 @@ namespace Orco.Web
 
             services.AddScoped<IProductService, ProductService>();
             services.AddControllersWithViews();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+            })
+                .AddCookie("Cookies", c => c.ExpireTimeSpan = TimeSpan.FromMinutes(10))
+                .AddOpenIdConnect("oidc", options =>
+                {
+                    options.Authority = Configuration["ServiceUrls:IdentityAPI"];
+                    options.GetClaimsFromUserInfoEndpoint = true;
+                    options.ClientId = "orco";
+                    options.ClientSecret = "secret";
+                    options.ResponseType = "code";
+                    options.TokenValidationParameters.NameClaimType = "name";
+                    options.TokenValidationParameters.RoleClaimType = "role";
+                    options.ClaimActions.MapJsonKey("role", "role", "role");
+                    options.ClaimActions.MapJsonKey("sub", "sub", "sub");
+                    options.Scope.Add("orco");
+                    options.SaveTokens = true;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +71,7 @@ namespace Orco.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

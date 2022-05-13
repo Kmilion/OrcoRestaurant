@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Orco.Services.ProductAPI.Models;
 using Orco.Services.ProductAPI.Models.DTOs;
 using Orco.Services.ProductAPI.Repository;
@@ -20,6 +21,7 @@ namespace Orco.Services.ProductAPI.Controllers
             _response = new ResponseDTO();
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<object> Get()
         {
@@ -37,6 +39,7 @@ namespace Orco.Services.ProductAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("{id}")]
         public async Task<object> Get(int id)
         {
@@ -54,6 +57,7 @@ namespace Orco.Services.ProductAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<object> Post([FromBody] ProductDTO productDTO)
         {
             try
@@ -70,6 +74,7 @@ namespace Orco.Services.ProductAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<object> Put([FromBody] ProductDTO productDTO)
         {
             try
@@ -86,6 +91,7 @@ namespace Orco.Services.ProductAPI.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         [Route("{id}")]
         public async Task<object> Delete(int id)
         {

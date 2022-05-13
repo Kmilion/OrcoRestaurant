@@ -15,55 +15,55 @@ namespace Orco.Web.Services
             _clientFactory = clientFactory;
         }
 
-        public async Task<T> CreateProductAsync<T>(ProductDTO productDTO)
+        public async Task<T> CreateProductAsync<T>(ProductDTO productDTO, string token)
         {
             return await SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.APIType.POST,
                 Data = productDTO,
                 Url = SD.ProductAPIBase + "api/products",
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public async Task<T> DeleteProductAsync<T>(int id)
+        public async Task<T> DeleteProductAsync<T>(int id, string token)
         {
             return await SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.APIType.DELETE,
                 Url = SD.ProductAPIBase + $"api/products/{id}",
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public async Task<T> GetAllProductsAsync<T>()
+        public async Task<T> GetAllProductsAsync<T>(string token)
         {
             return await SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.APIType.GET,
                 Url = SD.ProductAPIBase + "api/products",
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public async Task<T> GetProductByIdAsync<T>(int id)
+        public async Task<T> GetProductByIdAsync<T>(int id, string token)
         {
             return await SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.APIType.GET,
                 Url = SD.ProductAPIBase + $"api/products/{id}",
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public async Task<T> UpdateProductAsync<T>(ProductDTO productDTO)
+        public async Task<T> UpdateProductAsync<T>(ProductDTO productDTO, string token)
         {
             return await SendAsync<T>(new APIRequest()
             {
                 ApiType = SD.APIType.PUT,
                 Data = productDTO,
                 Url = SD.ProductAPIBase + "api/products",
-                AccessToken = ""
+                AccessToken = token
             });
         }
     }

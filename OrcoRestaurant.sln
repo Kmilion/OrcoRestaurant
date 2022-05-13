@@ -5,11 +5,13 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{78AD6ED6-EABA-46B7-9026-03EA5993A8CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orco.Web", "Orco.Web\Orco.Web.csproj", "{E36ECFD5-B351-4A4E-BE4B-68D2EC88A36D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orco.Web", "Orco.Web\Orco.Web.csproj", "{E36ECFD5-B351-4A4E-BE4B-68D2EC88A36D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{81F5D20F-0A47-4215-9C02-BA961DCE2518}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orco.Services.ProductAPI", "Orco.Services.ProductAPI\Orco.Services.ProductAPI.csproj", "{08EC2BCF-56E7-4562-9AF6-66AA90252B76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orco.Services.ProductAPI", "Orco.Services.ProductAPI\Orco.Services.ProductAPI.csproj", "{08EC2BCF-56E7-4562-9AF6-66AA90252B76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orco.Services.Identity", "Orco.Services.Identity\Orco.Services.Identity.csproj", "{EF953939-89FA-4991-A671-66AC37EF1E11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{08EC2BCF-56E7-4562-9AF6-66AA90252B76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08EC2BCF-56E7-4562-9AF6-66AA90252B76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08EC2BCF-56E7-4562-9AF6-66AA90252B76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF953939-89FA-4991-A671-66AC37EF1E11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF953939-89FA-4991-A671-66AC37EF1E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF953939-89FA-4991-A671-66AC37EF1E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF953939-89FA-4991-A671-66AC37EF1E11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E36ECFD5-B351-4A4E-BE4B-68D2EC88A36D} = {78AD6ED6-EABA-46B7-9026-03EA5993A8CA}
 		{08EC2BCF-56E7-4562-9AF6-66AA90252B76} = {81F5D20F-0A47-4215-9C02-BA961DCE2518}
+		{EF953939-89FA-4991-A671-66AC37EF1E11} = {81F5D20F-0A47-4215-9C02-BA961DCE2518}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B97FCDD9-EFC1-43B4-A6CA-58963F108635}
