@@ -57,7 +57,7 @@ namespace Orco.Services.ProductAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<object> Post([FromBody] ProductDTO productDTO)
         {
             try
@@ -74,7 +74,7 @@ namespace Orco.Services.ProductAPI.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<object> Put([FromBody] ProductDTO productDTO)
         {
             try

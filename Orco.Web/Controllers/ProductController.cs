@@ -31,12 +31,14 @@ namespace Orco.Web.Controllers
             return View(list);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult ProductCreate()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProductCreate(ProductDTO model)
         {
@@ -53,6 +55,7 @@ namespace Orco.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ProductEdit(int productId)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
@@ -66,6 +69,7 @@ namespace Orco.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProductEdit(ProductDTO model)
         {
