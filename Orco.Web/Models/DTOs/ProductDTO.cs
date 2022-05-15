@@ -4,6 +4,10 @@ namespace Orco.Web.Models.DTOs
 {
     public class ProductDTO
     {
+        public ProductDTO()
+        {
+            Count = 1;
+        }
         public int ProductId { get; set; }
         [Display(Name = "Nombre")]
         public string Name { get; set; }
@@ -15,5 +19,7 @@ namespace Orco.Web.Models.DTOs
         public ProductCategory ProductCategory { get; set; }
         [Display(Name = "Ruta de imagen")]
         public string ImageUrl { get; set; }
+        [Range(1, 100)]
+        public int Count { get; set; }
     }
 }

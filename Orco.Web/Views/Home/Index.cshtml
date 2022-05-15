@@ -1,8 +1,32 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using Orco.Web.Helpers
+@using Orco.Web.Models.DTOs
+@model IEnumerable<ProductDTO>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<form>
+    <div class="container row">
+
+        @foreach (var product in Model)
+        {
+            <div class="col-4 ">
+                <div class="p-0 my-3 border">
+                    <div class="card">
+                        <img src="@product.ImageUrl" class="card-img-top">
+                        <div class="card-body">
+                            <h3 class="card-title text-success">@product.Name</h3>
+                            <span class="badge alert-success mb-2">@(EnumHelper.GetDescription(product.ProductCategory))</span>
+                            <p class="card-text">@Html.Raw(@product.Description)</p>
+                            <div class="row">
+                                <div class="col pt-1">
+                                    <span style="font-size:23px;">@String.Format("{0:c}", product.Price)</span>
+                                </div>
+                                <div class="col">
+                                    <a asp-action="Details" asp-route-productId="@product.ProductId" class="btn btn-success form-control">Detalle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</form>

@@ -21,7 +21,6 @@ namespace Orco.Services.ProductAPI.Controllers
             _response = new ResponseDTO();
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<object> Get()
         {
@@ -39,7 +38,6 @@ namespace Orco.Services.ProductAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         [Route("{id}")]
         public async Task<object> Get(int id)
         {
