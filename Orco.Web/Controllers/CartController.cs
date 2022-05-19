@@ -13,15 +13,47 @@ namespace Orco.Web.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICartService _cartService;
+        private readonly ICouponService _couponService;
 
-        public CartController(IProductService productService, ICartService cartService)
+        public CartController(IProductService productService, ICartService cartService, ICouponService couponService)
         {
             _productService = productService;
             _cartService = cartService;
+            _couponService = couponService;
         }
         public async Task<IActionResult> CartIndex()
         {
             return View(await LoadCartBasedOnLoggedInUser());
+        }
+
+        [HttpPost]
+        [ActionName("ApplyCoupon")]
+        public async Task<IActionResult> ApplyCoupon(CartDTO cartDTO)
+        {
+            var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
+            var accessToken = await HttpContext.GetTokenAsync("acess-token");
+            var response = await _cartService.ApplyCoupon<ResponseDTO>(cartDTO, accessToken);
+
+            if (response != null && response.IsSuccess)
+            {
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("RemoveCoupon")]
+        public async Task<IActionResult> RemoveCoupon(CartDTO cartDTO)
+        {
+            var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
+            var accessToken = await HttpContext.GetTokenAsync("acess-token");
+            var response = await _cartService.RemoveCoupon<ResponseDTO>(cartDTO.CartHeader.UserId, accessToken);
+
+            if (response != null && response.IsSuccess)
+            {
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
         }
 
         public async Task<IActionResult> Remove(int cartDetailsId)
@@ -30,13 +62,17 @@ namespace Orco.Web.Controllers
             var accessToken = await HttpContext.GetTokenAsync("acess-token");
             var response = await _cartService.RemoveFromCartAsync<ResponseDTO>(cartDetailsId, accessToken);
 
-            CartDTO cartDTO = new();
-
             if (response != null && response.IsSuccess)
             {
                 return RedirectToAction(nameof(CartIndex));
             }
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Checkout()
+        {
+            return View(await LoadCartBasedOnLoggedInUser());
         }
 
         private async Task<CartDTO> LoadCartBasedOnLoggedInUser()
@@ -54,10 +90,22 @@ namespace Orco.Web.Controllers
 
             if (cartDTO.CartHeader != null)
             {
+                if (!string.IsNullOrEmpty(cartDTO.CartHeader.CouponCode))
+                {
+                    var coupon = await _couponService.GetCoupon<ResponseDTO>(cartDTO.CartHeader.CouponCode, accessToken);
+                    if (coupon != null && coupon.IsSuccess)
+                    {
+                        var couponObj = JsonConvert.DeserializeObject<CouponDTO>(Convert.ToString(coupon.Result));
+                        cartDTO.CartHeader.DiscountTotal = couponObj.DiscountAmount;
+                    }
+                }
+
                 foreach (var detail in cartDTO.CartDetails)
                 {
                     cartDTO.CartHeader.OrderTotal += detail.Product.Price * detail.Count;
                 }
+
+                cartDTO.CartHeader.OrderTotal -= cartDTO.CartHeader.DiscountTotal;
             }
 
             return cartDTO;

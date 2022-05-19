@@ -63,12 +63,24 @@
                     }
                     <div class="row">
                         <div class="col-6">
-                            <span>Cupón:</span>
-                            <input />
-                            <button type="submit" class="btn-success">Aplicar</button>
+                            @if (string.IsNullOrEmpty(Model.CartHeader.CouponCode))
+                            {
+                                <span>Cupón:</span>
+                                <input asp-for="CartHeader.CouponCode" />
+                                <button type="submit" asp-action="ApplyCoupon" class="btn-success">Agregar</button>
+                            }
+                            else
+                            {
+                                <span>Cupón:</span>
+                                <input asp-for="CartHeader.CouponCode" disabled />
+                                <button type="submit" asp-action="RemoveCoupon" class="btn-danger">Eliminar</button>
+                            }
                         </div>
                         <div class="col-6 text-end">
                             <span class="text-danger" style="font-size:21px;">Total: @string.Format("{0:c}", Model.CartHeader.OrderTotal)<br /></span>
+                            @if(Model.CartHeader.DiscountTotal > 0){
+                            <span class="text-success">Descuento: @string.Format("{0:c}", Model.CartHeader.DiscountTotal)</span>
+                        }
                         </div>
                     </div>
                 </div>
@@ -76,7 +88,7 @@
                     <div class="col-6 col-md-3 offset-md-6">
                     </div>
                     <div class="col-6 col-md-3">
-                        <a asp-action="´Checkout" class="btn btn-success form-control ">
+                        <a asp-action="Checkout" class="btn btn-success form-control ">
                             <span>Verificar</span>
                         </a>
                     </div>

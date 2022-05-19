@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Orco.Services.CouponAPI.Context;
+using Orco.Services.CouponAPI.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace Orco.Services.CouponAPI
             IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
             services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            //services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICouponRepository, CouponRepository>();
             services.AddControllers();
 
             services.AddAuthentication("Bearer")

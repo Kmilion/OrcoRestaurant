@@ -9,12 +9,12 @@ namespace Orco.Services.ShoppingCartAPI.Controllers
 {
     [ApiController]
     [Route("api/cart")]
-    public class CartController : Controller
+    public class CartAPIController : Controller
     {
         private readonly ICartRepository _cartRepository;
         protected ResponseDTO _response;
 
-        public CartController(ICartRepository cartRepository)
+        public CartAPIController(ICartRepository cartRepository)
         {
             _cartRepository = cartRepository;
             _response = new ResponseDTO();
@@ -69,11 +69,43 @@ namespace Orco.Services.ShoppingCartAPI.Controllers
         }
 
         [HttpPost("RemoveCart")]
-        public async Task<object> RemoveCart([FromBody]int cartId)
+        public async Task<object> RemoveCart([FromBody] int cartId)
         {
             try
             {
                 bool isSuccess = await _cartRepository.RemoveFromCart(cartId);
+                _response.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return _response;
+        }
+
+        [HttpPost("ApplyCoupon")]
+        public async Task<object> ApplyCoupon([FromBody] CartDTO cartDTO)
+        {
+            try
+            {
+                bool isSuccess = await _cartRepository.ApplyCoupon(cartDTO.CartHeader.UserId, cartDTO.CartHeader.CouponCode);
+                _response.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return _response;
+        }
+
+        [HttpPost("RemoveCoupon")]
+        public async Task<object> RemoveCoupon([FromBody] string userId)
+        {
+            try
+            {
+                bool isSuccess = await _cartRepository.RemoveCoupon(userId);
                 _response.Result = isSuccess;
             }
             catch (Exception ex)
