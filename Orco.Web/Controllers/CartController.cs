@@ -75,6 +75,26 @@ namespace Orco.Web.Controllers
             return View(await LoadCartBasedOnLoggedInUser());
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Checkout(CartDTO cartDTO)
+        {
+            try
+            {
+                var accessToken = await HttpContext.GetTokenAsync("acess-token");
+                var response = await _cartService.Checkout<ResponseDTO>(cartDTO.CartHeader, accessToken);
+                return RedirectToAction(nameof(Confirmation));
+            }
+            catch (Exception e)
+            {
+                return View(cartDTO);
+            }
+        }
+
+        public IActionResult Confirmation()
+        {
+            return View();
+        }
+
         private async Task<CartDTO> LoadCartBasedOnLoggedInUser()
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;

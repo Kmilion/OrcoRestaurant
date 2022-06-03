@@ -62,6 +62,7 @@ namespace Orco.Web.Controllers
                     UserId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value
                 }
             };
+
             CartDetailsDTO cartDetailsDTO = new()
             {
                 Count = productDTO.Count,
