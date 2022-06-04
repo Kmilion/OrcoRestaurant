@@ -36,6 +36,17 @@ namespace Orco.Web.Services
             });
         }
 
+        public async Task<T> Checkout<T>(CartHeaderDTO cartHeaderDTO, string token = null)
+        {
+            return await SendAsync<T>(new APIRequest()
+            {
+                ApiType = SD.APIType.POST,
+                Data = cartHeaderDTO,
+                Url = SD.ShoppingCartAPIBase + "api/cart/Checkout",
+                AccessToken = token
+            });
+        }
+
         public async Task<T> GetCartByUserIdAsync<T>(string userId, string token = null)
         {
             return await SendAsync<T>(new APIRequest()

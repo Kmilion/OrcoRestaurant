@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Orco.MessageBus;
+using Orco.Services.ShoppingCartAPI.Messages;
 using Orco.Services.ShoppingCartAPI.Models.DTOs;
 using Orco.Services.ShoppingCartAPI.Repository;
 using System;
@@ -12,12 +14,14 @@ namespace Orco.Services.ShoppingCartAPI.Controllers
     public class CartAPIController : Controller
     {
         private readonly ICartRepository _cartRepository;
+        private readonly IMessageBus _messageBus;
         protected ResponseDTO _response;
 
-        public CartAPIController(ICartRepository cartRepository)
+        public CartAPIController(ICartRepository cartRepository, IMessageBus messageBus)
         {
             _cartRepository = cartRepository;
             _response = new ResponseDTO();
+            _messageBus = messageBus;
         }
 
         [HttpGet("GetCart/{userId}")]
@@ -107,6 +111,32 @@ namespace Orco.Services.ShoppingCartAPI.Controllers
             {
                 bool isSuccess = await _cartRepository.RemoveCoupon(userId);
                 _response.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return _response;
+        }
+
+        [HttpPost("Checkout")]
+        public async Task<object> Checkout(CheckoutHeaderDTO checkoutHeaderDTO)
+        {
+            try
+            {
+                CartDTO cartDTO = await _cartRepository.GetCartByUserId(checkoutHeaderDTO.UserId);
+                if (cartDTO == null)
+                {
+                    return BadRequest();
+                }
+                checkoutHeaderDTO.CartDetails = cartDTO.CartDetails;
+                foreach (var detail in cartDTO.CartDetails)
+                {
+                    checkoutHeaderDTO.CartTotalItems += detail.Count;
+                }
+                await _messageBus.PublishMessage(checkoutHeaderDTO, "checkoutmessagetopic");
+
             }
             catch (Exception ex)
             {

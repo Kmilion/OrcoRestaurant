@@ -10,15 +10,17 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Orco.MessageBus;
-using Orco.Services.ShoppingCartAPI.Context;
-using Orco.Services.ShoppingCartAPI.Repository;
+using Orco.Services.OrderAPI.Context;
+using Orco.Services.OrderAPI.Extension;
+using Orco.Services.OrderAPI.Messaging;
+using Orco.Services.OrderAPI.Repository;
+using Orco.Services.OrderAPI.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Orco.Services.ShoppingCartAPI
+namespace Orco.Services.OrderAPI
 {
     public class Startup
     {
@@ -34,11 +36,14 @@ namespace Orco.Services.ShoppingCartAPI
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-            services.AddSingleton(mapper);
+            //IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+            //services.AddSingleton(mapper);
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddScoped<ICartRepository, CartRepository>();
-            services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            optionBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddSingleton(new OrderRepository(optionBuilder.Options));
+            services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
             services.AddControllers();
 
             services.AddAuthentication("Bearer")
@@ -62,8 +67,7 @@ namespace Orco.Services.ShoppingCartAPI
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Orco.Services.ShoppingCartAPI", Version = "v1" });
-                c.EnableAnnotations();
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Orco.Services.CouponAPI", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = @"Enter 'Bearer' [space] and your token",
@@ -100,7 +104,7 @@ namespace Orco.Services.ShoppingCartAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Orco.Services.ShoppingCartAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Orco.Services.OrderAPI v1"));
             }
 
             app.UseHttpsRedirection();
@@ -113,6 +117,8 @@ namespace Orco.Services.ShoppingCartAPI
             {
                 endpoints.MapControllers();
             });
+
+            app.UseAzureServiceBusConsumer();
         }
     }
 }

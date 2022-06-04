@@ -11,5 +11,7 @@ namespace Orco.Web.Services.IServices
         Task<T> RemoveFromCartAsync<T>(int cartId, string token = null);
         Task<T> ApplyCoupon<T>(CartDTO cartDTO, string token = null);
         Task<T> RemoveCoupon<T>(string userId, string token = null);
+        Task<T> Checkout<T>(CartHeaderDTO cartHeaderDTO, string token = null);
+
     }
 }
