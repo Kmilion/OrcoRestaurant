@@ -14,14 +14,16 @@ namespace Orco.Services.ShoppingCartAPI.Controllers
     public class CartAPIController : Controller
     {
         private readonly ICartRepository _cartRepository;
+        private readonly ICouponRepository _couponRepository;
         private readonly IMessageBus _messageBus;
         protected ResponseDTO _response;
 
-        public CartAPIController(ICartRepository cartRepository, IMessageBus messageBus)
+        public CartAPIController(ICartRepository cartRepository, IMessageBus messageBus, ICouponRepository couponRepository)
         {
             _cartRepository = cartRepository;
             _response = new ResponseDTO();
             _messageBus = messageBus;
+            _couponRepository = couponRepository;
         }
 
         [HttpGet("GetCart/{userId}")]
@@ -135,6 +137,19 @@ namespace Orco.Services.ShoppingCartAPI.Controllers
                 {
                     checkoutHeaderDTO.CartTotalItems += detail.Count;
                 }
+
+                if (!string.IsNullOrEmpty(checkoutHeaderDTO.CouponCode))
+                {
+                    CouponDTO couponDTO = await _couponRepository.GetCoupon(checkoutHeaderDTO.CouponCode);
+                    if (checkoutHeaderDTO.DiscountTotal != couponDTO.DiscountAmount)
+                    {
+                        _response.IsSuccess = false;
+                        _response.ErrorMessages = new List<string>() { "Coupon Price has changed, please confirm" };
+                        _response.DisplayMessage = "Coupon Price has changed, please confirm";
+                        return _response;
+                    }
+                }
+
                 await _messageBus.PublishMessage(checkoutHeaderDTO, "checkoutmessagetopic");
 
             }
