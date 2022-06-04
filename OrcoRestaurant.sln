@@ -21,7 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orco.MessageBus", "Orco.MessageBus\Orco.MessageBus.csproj", "{7401E0FA-A752-4F76-B858-967A4A0269F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orco.Services.OrderAPI", "Orco.Services.OrderAPI\Orco.Services.OrderAPI.csproj", "{22E279F3-B86B-4BEE-97F2-A0F5E5DE2A6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orco.Services.OrderAPI", "Orco.Services.OrderAPI\Orco.Services.OrderAPI.csproj", "{22E279F3-B86B-4BEE-97F2-A0F5E5DE2A6B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payments", "Payments", "{6245A171-C08D-42FA-B28C-B6D33848F499}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentProcessor", "PaymentProcessor\PaymentProcessor.csproj", "{40039F2A-FE36-4812-8EE0-133CD33C6FEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orco.Services.PaymentAPI", "Orco.Services.PaymentAPI\Orco.Services.PaymentAPI.csproj", "{F09AD71C-5EFD-408B-919D-8CE8071B1418}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +63,14 @@ Global
 		{22E279F3-B86B-4BEE-97F2-A0F5E5DE2A6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22E279F3-B86B-4BEE-97F2-A0F5E5DE2A6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22E279F3-B86B-4BEE-97F2-A0F5E5DE2A6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40039F2A-FE36-4812-8EE0-133CD33C6FEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40039F2A-FE36-4812-8EE0-133CD33C6FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40039F2A-FE36-4812-8EE0-133CD33C6FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40039F2A-FE36-4812-8EE0-133CD33C6FEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F09AD71C-5EFD-408B-919D-8CE8071B1418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F09AD71C-5EFD-408B-919D-8CE8071B1418}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F09AD71C-5EFD-408B-919D-8CE8071B1418}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F09AD71C-5EFD-408B-919D-8CE8071B1418}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +83,8 @@ Global
 		{B5D7EADC-6FCB-47FB-B158-1D8E3C9961AB} = {81F5D20F-0A47-4215-9C02-BA961DCE2518}
 		{7401E0FA-A752-4F76-B858-967A4A0269F0} = {20280490-4F16-405C-A133-69A08B5A42F4}
 		{22E279F3-B86B-4BEE-97F2-A0F5E5DE2A6B} = {81F5D20F-0A47-4215-9C02-BA961DCE2518}
+		{40039F2A-FE36-4812-8EE0-133CD33C6FEF} = {6245A171-C08D-42FA-B28C-B6D33848F499}
+		{F09AD71C-5EFD-408B-919D-8CE8071B1418} = {81F5D20F-0A47-4215-9C02-BA961DCE2518}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B97FCDD9-EFC1-43B4-A6CA-58963F108635}

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Orco.MessageBus;
 using Orco.Services.OrderAPI.Context;
 using Orco.Services.OrderAPI.Extension;
 using Orco.Services.OrderAPI.Messaging;
@@ -44,6 +45,8 @@ namespace Orco.Services.OrderAPI
             optionBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             services.AddSingleton(new OrderRepository(optionBuilder.Options));
             services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
+            services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+
             services.AddControllers();
 
             services.AddAuthentication("Bearer")
