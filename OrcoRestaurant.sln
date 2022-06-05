@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orco.Services.PaymentAPI", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orco.Services.Email", "Orco.Services.Email\Orco.Services.Email.csproj", "{4A6790CA-8A32-44B2-9A4A-26B38CE5C650}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{F43DD755-209E-4B37-ABAD-A4F3E44DC9D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orco.GatewaySolution", "Orco.GatewaySolution\Orco.GatewaySolution.csproj", "{E0D8D16F-65CB-4E9E-8CC3-E70859180213}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +81,10 @@ Global
 		{4A6790CA-8A32-44B2-9A4A-26B38CE5C650}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A6790CA-8A32-44B2-9A4A-26B38CE5C650}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A6790CA-8A32-44B2-9A4A-26B38CE5C650}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0D8D16F-65CB-4E9E-8CC3-E70859180213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0D8D16F-65CB-4E9E-8CC3-E70859180213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0D8D16F-65CB-4E9E-8CC3-E70859180213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0D8D16F-65CB-4E9E-8CC3-E70859180213}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +100,7 @@ Global
 		{40039F2A-FE36-4812-8EE0-133CD33C6FEF} = {6245A171-C08D-42FA-B28C-B6D33848F499}
 		{F09AD71C-5EFD-408B-919D-8CE8071B1418} = {81F5D20F-0A47-4215-9C02-BA961DCE2518}
 		{4A6790CA-8A32-44B2-9A4A-26B38CE5C650} = {81F5D20F-0A47-4215-9C02-BA961DCE2518}
+		{E0D8D16F-65CB-4E9E-8CC3-E70859180213} = {F43DD755-209E-4B37-ABAD-A4F3E44DC9D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B97FCDD9-EFC1-43B4-A6CA-58963F108635}

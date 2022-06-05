@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Orco.MessageBus;
 using Orco.Services.ShoppingCartAPI.Messages;
 using Orco.Services.ShoppingCartAPI.Models.DTOs;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Orco.Services.ShoppingCartAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/cart")]
     public class CartAPIController : Controller

@@ -13,7 +13,7 @@ namespace Orco.Services.ProductAPI.Controllers
     public class ProductAPIController : ControllerBase
     {
         protected ResponseDTO _response;
-        private IProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
         public ProductAPIController(IProductRepository productRepository)
         {
