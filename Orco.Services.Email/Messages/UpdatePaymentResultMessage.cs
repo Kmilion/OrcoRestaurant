@@ -1,11 +1,10 @@
-﻿using Orco.MessageBus;
-
-namespace Orco.Services.PaymentAPI.Messages
+﻿namespace Orco.Services.Email.Messages
 {
-    public class UpdatePaymentResultMessage : BaseMessage
+    public class UpdatePaymentResultMessage
     {
         public int OrderId { get; set; }
         public bool Status { get; set; }
         public string Email { get; set; }
+
     }
 }
