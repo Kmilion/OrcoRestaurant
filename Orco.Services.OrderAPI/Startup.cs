@@ -14,6 +14,7 @@ using Orco.MessageBus;
 using Orco.Services.OrderAPI.Context;
 using Orco.Services.OrderAPI.Extension;
 using Orco.Services.OrderAPI.Messaging;
+using Orco.Services.OrderAPI.RabbitMQSender;
 using Orco.Services.OrderAPI.Repository;
 using Orco.Services.OrderAPI.Repository.IRepository;
 using System;
@@ -43,9 +44,13 @@ namespace Orco.Services.OrderAPI
 
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             optionBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+
+            services.AddHostedService<RabbitMQPaymentConsumer>();
+            services.AddHostedService<RabbitMQCheckoutConsumer>();
             services.AddSingleton(new OrderRepository(optionBuilder.Options));
             services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
             services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+            services.AddSingleton<IRabbitMQOrderMessageSender, RabbitMQOrderMessageSender>();
 
             services.AddControllers();
 

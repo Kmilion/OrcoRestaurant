@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Orco.MessageBus;
 using Orco.Services.ShoppingCartAPI.Messages;
 using Orco.Services.ShoppingCartAPI.Models.DTOs;
+using Orco.Services.ShoppingCartAPI.RabbitMQSender;
 using Orco.Services.ShoppingCartAPI.Repository;
 using System;
 using System.Collections.Generic;
@@ -18,14 +19,16 @@ namespace Orco.Services.ShoppingCartAPI.Controllers
         private readonly ICartRepository _cartRepository;
         private readonly ICouponRepository _couponRepository;
         private readonly IMessageBus _messageBus;
+        private readonly IRabbitMQCartMessageSender _rabbitMQCartMessageSender;
         protected ResponseDTO _response;
 
-        public CartAPIController(ICartRepository cartRepository, IMessageBus messageBus, ICouponRepository couponRepository)
+        public CartAPIController(ICartRepository cartRepository, IMessageBus messageBus, ICouponRepository couponRepository, IRabbitMQCartMessageSender rabbitMQCartMessageSender)
         {
             _cartRepository = cartRepository;
             _response = new ResponseDTO();
             _messageBus = messageBus;
             _couponRepository = couponRepository;
+            _rabbitMQCartMessageSender = rabbitMQCartMessageSender;
         }
 
         [HttpGet("GetCart/{userId}")]
@@ -152,7 +155,11 @@ namespace Orco.Services.ShoppingCartAPI.Controllers
                     }
                 }
 
+                // Azure Service Bus
                 await _messageBus.PublishMessage(checkoutHeaderDTO, "checkoutqueue");
+
+                // RabbitMQ
+                //_rabbitMQCartMessageSender.SendMessage(checkoutHeaderDTO, "checkoutqueue");
                 await _cartRepository.ClearCart(checkoutHeaderDTO.UserId);
             }
             catch (Exception ex)

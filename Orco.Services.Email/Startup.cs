@@ -37,7 +37,7 @@ namespace Orco.Services.Email
             //IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
             //services.AddSingleton(mapper);
             services.AddScoped<IEmailRepository, EmailRepository>();
-
+            services.AddHostedService<RabbitMQPaymentConsumer>();
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             optionBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             services.AddSingleton(new EmailRepository(optionBuilder.Options));
