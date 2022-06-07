@@ -7,8 +7,8 @@
 
         @foreach (var product in Model)
         {
-            <div class="col-4 ">
-                <div class="p-0 my-3 border">
+            <div class="col-4" style="display:grid; grid-auto-flow:column; gap:5%;">
+                <div class="p-0 my-3 border" style="display:grid; grid-auto-flow:column; gap:5%;">
                     <div class="card">
                         <img src="@product.ImageUrl" class="card-img-top">
                         <div class="card-body">
