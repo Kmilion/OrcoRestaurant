@@ -31,7 +31,7 @@ namespace Orco.Web.Controllers
         public async Task<IActionResult> ApplyCoupon(CartDTO cartDTO)
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
-            var accessToken = await HttpContext.GetTokenAsync("acess-token");
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
             var response = await _cartService.ApplyCoupon<ResponseDTO>(cartDTO, accessToken);
 
             if (response != null && response.IsSuccess)
@@ -46,7 +46,7 @@ namespace Orco.Web.Controllers
         public async Task<IActionResult> RemoveCoupon(CartDTO cartDTO)
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
-            var accessToken = await HttpContext.GetTokenAsync("acess-token");
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
             var response = await _cartService.RemoveCoupon<ResponseDTO>(cartDTO.CartHeader.UserId, accessToken);
 
             if (response != null && response.IsSuccess)
@@ -59,7 +59,7 @@ namespace Orco.Web.Controllers
         public async Task<IActionResult> Remove(int cartDetailsId)
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
-            var accessToken = await HttpContext.GetTokenAsync("acess-token");
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
             var response = await _cartService.RemoveFromCartAsync<ResponseDTO>(cartDetailsId, accessToken);
 
             if (response != null && response.IsSuccess)
@@ -80,7 +80,7 @@ namespace Orco.Web.Controllers
         {
             try
             {
-                var accessToken = await HttpContext.GetTokenAsync("acess-token");
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
                 var response = await _cartService.Checkout<ResponseDTO>(cartDTO.CartHeader, accessToken);
 
                 if (!response.IsSuccess)
@@ -105,7 +105,7 @@ namespace Orco.Web.Controllers
         private async Task<CartDTO> LoadCartBasedOnLoggedInUser()
         {
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
-            var accessToken = await HttpContext.GetTokenAsync("acess-token");
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
             var response = await _cartService.GetCartByUserIdAsync<ResponseDTO>(userId, accessToken);
 
             CartDTO cartDTO = new();
