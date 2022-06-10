@@ -2,8 +2,8 @@
 
 <div class="login-page">
     <div class="lead">
-        <h1>Login</h1>
-        <p>Elije cómo ingresar</p>
+        <h1>Ingresar</h1>
+        <p>¿Cómo quiere identificarse?</p>
     </div>
 
     <partial name="_ValidationSummary" />
@@ -15,7 +15,7 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Cuenta local</h2>
+                        <h2>Cuenta</h2>
                     </div>
 
                     <div class="card-body">
@@ -41,12 +41,12 @@
                                     </div>
                                 </div>
                             }
-                            <button class="btn btn-primary" name="button" value="login">Login</button>
+                            <button class="btn btn-primary" name="button" value="login">Ingresar</button>
                             <button class="btn btn-secondary" name="button" value="cancel">Cancelar</button>
                         </form>
                     </div>
                     <div class="card-footer">
-                        <a href="@Url.Action("Register", new {Model.ReturnUrl})">Nuevo Usuario? Registrar</a>
+                        <a href="@Url.Action("Register", new {Model.ReturnUrl})">Registrarse</a>
                     </div>
                 </div>
             </div>

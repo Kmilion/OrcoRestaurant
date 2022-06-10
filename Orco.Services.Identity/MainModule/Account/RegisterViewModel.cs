@@ -13,7 +13,7 @@ namespace Orco.Services.Identity.MainModule.Account
         public string Username { get; set; }
 
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
         [Display(Name = "Nombre")]
         public string FirstName { get; set; }
