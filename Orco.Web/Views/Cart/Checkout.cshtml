@@ -14,7 +14,7 @@
         <input asp-for="CartHeader.DiscountTotal" hidden />
         <input asp-for="CartHeader.OrderTotal" hidden />
         <div>
-            <span style="font-size:25px;" class="text-warning">Enter details and place order :</span>
+            <span style="font-size:25px;" class="text-warning">Ingrese los detalles</span>
             <br />
         </div>
         <div class="border mt-2">
@@ -22,37 +22,37 @@
                 <div class="col-7">
                     <div class="row">
                         <div class="col-12">
-                            <label class="col-form-label">First Name :</label>
+                            <label class="col-form-label">Nombre</label>
                             <input asp-for="CartHeader.FirstName" class="form-control" />
                         </div>
                         <div class="col-12">
-                            <label class="col-form-label">Last Name :</label>
+                            <label class="col-form-label">Apellido</label>
                             <input asp-for="CartHeader.LastName" class="form-control" />
                         </div>
                         <div class="col-12">
-                            <label class="col-form-label">Email :</label>
+                            <label class="col-form-label">Correo electrónico</label>
                             <input asp-for="CartHeader.Email" class="form-control" />
                         </div>
                         <div class="col-12">
-                            <label class="col-form-label">Phone :</label>
+                            <label class="col-form-label">Teléfono</label>
                             <input asp-for="CartHeader.Phone" class="form-control" />
                         </div>
                         <div class="col-12">
-                            <label class="col-form-label">PickUp Time</label>
+                            <label class="col-form-label">¿Cuándo desea recoger su compra?</label>
                             <input asp-for="CartHeader.PickupDateTime" class="form-control form_datetime" type="text">
                         </div>
                         <div class="col-12">
-                            <label class="col-form-label">Card Number :</label>
+                            <label class="col-form-label">Número de tarjeta</label>
                             <input asp-for="CartHeader.CardNumber" class="form-control" />
                         </div>
 
                         <div class="col-12">
-                            <label class="col-form-label">CVV :</label>
+                            <label class="col-form-label">CVV</label>
                             <input asp-for="CartHeader.CVV" class="form-control" />
                         </div>
 
                         <div class="col-12 pb-4">
-                            <label class="col-form-label">Expiry :</label>
+                            <label class="col-form-label">Fecha de expiración</label>
                             <input asp-for="CartHeader.ExpiryMonthYear" placeholder="MMYY" class="form-control" />
                         </div>
                     </div>
@@ -63,14 +63,14 @@
                             <div class=" d-none d-lg-block">
                                 <div class="row text-danger">
                                     <div class="col-6">
-                                        Product Details
+                                        Detalles
                                     </div>
 
                                     <div class="col-3">
-                                        Price
+                                        Precio
                                     </div>
                                     <div class="col-3">
-                                        Count
+                                        Cantidad
                                     </div>
                                 </div>
                             </div>
@@ -95,8 +95,8 @@
                                 <hr />
                             }
                             <div class="row">
-                                <div class="col-12 text-right pr-4 text-danger">
-                                    Order Total: @string.Format("{0:c}", Model.CartHeader.OrderTotal)<br />
+                                <div class="col-12 text-right pr-4 text-danger" style="text-align:center;">
+                                    Total: @string.Format("{0:c}", Model.CartHeader.OrderTotal)<br />
                                     @if (Model.CartHeader.DiscountTotal > 0)
                                     {
                                         <span class="text-success">Descuento: @string.Format("{0:c}", Model.CartHeader.DiscountTotal)</span>
@@ -110,7 +110,7 @@
 
                                 <div class="col-12 ">
                                     <button type="submit" class="btn btn-success form-control ">
-                                        <span>Place Order</span>
+                                        <span>Comprar</span>
                                     </button>
                                 </div>
                             </div>
