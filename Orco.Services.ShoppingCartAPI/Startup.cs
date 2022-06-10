@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Orco.MessageBus;
 using Orco.Services.ShoppingCartAPI.Context;
+using Orco.Services.ShoppingCartAPI.RabbitMQSender;
 using Orco.Services.ShoppingCartAPI.Repository;
 using System;
 using System.Collections.Generic;
@@ -40,8 +41,9 @@ namespace Orco.Services.ShoppingCartAPI
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<ICouponRepository, CouponRepository>();
             services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
+            services.AddSingleton<IRabbitMQCartMessageSender, RabbitMQCartMessageSender>();
             services.AddControllers();
-            services.AddHttpClient<ICouponRepository, CouponRepository>(u => u.BaseAddress = 
+            services.AddHttpClient<ICouponRepository, CouponRepository>(u => u.BaseAddress =
             new Uri(Configuration["ServiceUrls:CouponAPI"]));
 
             services.AddAuthentication("Bearer")
