@@ -41,7 +41,7 @@ namespace Orco.Services.OrderAPI.Messaging
 
             var client = new ServiceBusClient(serviceBusConnectionString);
 
-            checkoutProcessor = client.CreateProcessor(checkoutMessageTopic, subscriptionCheckout);
+            checkoutProcessor = client.CreateProcessor(checkoutMessageTopic);
             orderUpdatePaymentStatusProcessor = client.CreateProcessor(orderUpdatePaymentResultTopic, subscriptionCheckout);
 
         }
@@ -119,7 +119,8 @@ namespace Orco.Services.OrderAPI.Messaging
                 CVV = orderHeader.CVV,
                 ExpiryMonthYear = orderHeader.ExpiryMonthYear,
                 OrderId = orderHeader.OrderHeaderId,
-                OrderTotal = orderHeader.OrderTotal
+                OrderTotal = orderHeader.OrderTotal,
+                Email = orderHeader.Email
             };
 
             try

@@ -150,7 +150,7 @@ namespace Orco.Services.ShoppingCartAPI.Controllers
                     }
                 }
 
-                await _messageBus.PublishMessage(checkoutHeaderDTO, "checkoutmessagetopic");
+                await _messageBus.PublishMessage(checkoutHeaderDTO, "checkoutqueue");
                 await _cartRepository.ClearCart(checkoutHeaderDTO.UserId);
             }
             catch (Exception ex)

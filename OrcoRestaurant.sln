@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaymentProcessor", "Payment
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orco.Services.PaymentAPI", "Orco.Services.PaymentAPI\Orco.Services.PaymentAPI.csproj", "{F09AD71C-5EFD-408B-919D-8CE8071B1418}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orco.Services.Email", "Orco.Services.Email\Orco.Services.Email.csproj", "{4A6790CA-8A32-44B2-9A4A-26B38CE5C650}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{F09AD71C-5EFD-408B-919D-8CE8071B1418}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F09AD71C-5EFD-408B-919D-8CE8071B1418}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F09AD71C-5EFD-408B-919D-8CE8071B1418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A6790CA-8A32-44B2-9A4A-26B38CE5C650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A6790CA-8A32-44B2-9A4A-26B38CE5C650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A6790CA-8A32-44B2-9A4A-26B38CE5C650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A6790CA-8A32-44B2-9A4A-26B38CE5C650}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{22E279F3-B86B-4BEE-97F2-A0F5E5DE2A6B} = {81F5D20F-0A47-4215-9C02-BA961DCE2518}
 		{40039F2A-FE36-4812-8EE0-133CD33C6FEF} = {6245A171-C08D-42FA-B28C-B6D33848F499}
 		{F09AD71C-5EFD-408B-919D-8CE8071B1418} = {81F5D20F-0A47-4215-9C02-BA961DCE2518}
+		{4A6790CA-8A32-44B2-9A4A-26B38CE5C650} = {81F5D20F-0A47-4215-9C02-BA961DCE2518}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B97FCDD9-EFC1-43B4-A6CA-58963F108635}
